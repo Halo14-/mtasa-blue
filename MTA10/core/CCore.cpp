@@ -781,6 +781,28 @@ HWND CCore::GetHookedWindow ( void )
     return CMessageLoopHook::GetSingleton ().GetHookedWindowHandle ();
 }
 
+//
+// Show a question box to be used for network disconnections
+//
+CQuestionBox* CCore::ShowQuestionBox( std::string strError, std::string strErrorCode, const GUI_CALLBACK & Callback, 
+														 std::string ButtonText = std::string(), std::string OptionalButtonText = std::string() )
+{
+    CQuestionBox* pQuestionBox = CCore::GetSingleton ().GetLocalGUI ()->GetMainMenu ()->GetQuestionWindow ();
+    pQuestionBox->Reset ();
+    pQuestionBox->SetTitle ( strErrorCode );
+    pQuestionBox->SetMessage ( strError );
+    pQuestionBox->SetButton ( 0, _((ButtonText.empty()?"No":ButtonText.c_str())) );
+    pQuestionBox->SetButton ( 1, _((OptionalButtonText.empty()?"Yes":OptionalButtonText.c_str())) );
+    pQuestionBox->SetCallback ( Callback, this );
+    pQuestionBox->Show ();
+	
+	return pQuestionBox;
+}
+
+CMainMenu* CCore::GetMainMenu ( void )
+{
+	return m_pLocalGUI->GetMainMenu();
+}
 
 void CCore::HideMainMenu ( void )
 {
