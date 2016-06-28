@@ -139,6 +139,7 @@ public:
     bool                    IsMenuVisible                   ( void );
     bool                    IsCursorForcedVisible           ( void );
     bool                    IsCursorControlsToggled         ( void ) { return m_bCursorToggleControls; }
+    CMainMenu*              GetMainMenu                     ( void );
     void                    HideMainMenu                    ( void );
     void                    HideQuickConnect                ( void );
     void                    SetCenterCursor                 ( bool bEnabled );
@@ -160,6 +161,9 @@ public:
     void                    SetOfflineMod                   ( bool bOffline );
     void                    ForceCursorVisible              ( bool bVisible, bool bToggleControls = true );
     void                    SetMessageProcessor             ( pfnProcessMessage pfnMessageProcessor );
+    
+    CQuestionBox*           ShowQuestionBox                 ( std::string strError, std::string strErrorCode, const GUI_CALLBACK & Callback, 
+                                                                std::string ButtonText = std::string(), std::string OptionalButtonText = std::string() );
     void                    ShowMessageBox                  ( const char* szTitle, const char* szText, unsigned int uiFlags, GUI_CALLBACK * ResponseHandler = NULL );
     void                    RemoveMessageBox                ( bool bNextFrame = false );
     void                    ShowErrorMessageBox             ( const SString& strTitle, SString strMessage, const SString& strTroubleLink = "" );
